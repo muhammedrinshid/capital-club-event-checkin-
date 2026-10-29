@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0A2342;
+  --color-deep: #06172E;
+  --color-sky: #7CC6F2;
+  --color-mist: #EAF5FD;
+  --font-sans: "Instrument Sans", system-ui, sans-serif;
+  --font-display: "Newsreader", Georgia, serif;
+  --ease-smooth: cubic-bezier(0.22, 0.8, 0.2, 1);
+}
+
+html, body, #root { height: 100%; }
+body { font-family: var(--font-sans); background: var(--color-deep); color: white; overscroll-behavior: none; }
+button { touch-action: manipulation; }
+:focus-visible { outline: 3px solid var(--color-sky); outline-offset: 3px; }
+
+/* the one orchestrated moment: the poster opens to full screen */
+@keyframes open-up { from { opacity: 0; transform: scale(.94); border-radius: 28px; } to { opacity: 1; transform: scale(1); border-radius: 0; } }
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes drain { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+.anim-open { animation: open-up .55s var(--ease-smooth) both; }
+.anim-rise { animation: rise .45s var(--ease-smooth) both; }
+.anim-drain { transform-origin: left; animation: drain linear forwards; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
